@@ -1,0 +1,215 @@
+---
+import { storyChapters, currentlyWorkingOn } from "../data/story";
+
+function formatDate(iso: string) {
+  return new Date(iso).toLocaleDateString("en-US", { year: "numeric", month: "short", day: "numeric" });
+}
+
+async function fetchLastActive(url: string): Promise<string | null> {
+  const match = url.match(/github\.com\/([^/]+)\/([^/]+)/);
+  if (!match) return null;
+  const [, owner, repo] = match;
+  try {
+    const res = await fetch(`https://api.github.com/repos/${owner}/${repo}`, {
+      headers: { Accept: "application/vnd.github+json" },
+    });
+    if (!res.ok) return null;
+    const data = await res.json();
+    return data.created_at ?? null;
+  } catch {
+    return null;
+  }
+}
+
+const nowProjects = await Promise.all(
+  currentlyWorkingOn.map(async (p) => ({ ...p, lastActive: await fetchLastActive(p.url) }))
+);
+---
+
+<section class="story" id="story">
+    <div class="wrap">
+        <p class="mono log-line">
+            <span class="tag">$</span> cat /var/log/boot.log
+        </p>
+        <h2>How we got here</h2>
+
+        <ol class="timeline">
+            {
+                storyChapters.map((ch) => (
+                    <li class="entry" id={ch.id}>
+                        <div class="entry-meta mono">
+                            <span class="stage">[{ch.stage}]</span>
+                            <span class="range">{ch.range}</span>
+                        </div>
+                        <h3>{ch.title}</h3>
+                        {ch.paragraphs.map((p) => (
+                            <p class="body">{p}</p>
+                        ))}
+                        {ch.quote && <p class="quote mono">{ch.quote}</p>}
+                    </li>
+                ))
+            }
+        </ol>
+
+        <div class="now">
+            <p class="mono log-line">
+                <span class="tag">$</span> ps aux | grep nyjako
+            </p>
+            <h3>Currently running</h3>
+            <ul class="now-list">
+                {
+                    nowProjects.map((p) => (
+                        <li>
+                            <a
+                                class="mono now-name"
+                                href={p.url}
+                                target="_blank"
+                                rel="noopener"
+                            >
+                                {p.name} →
+                            </a>
+                            <p class="now-note">{p.note}</p>
+                            <p class="now-date mono">
+                                {p.lastActive ? `started ${formatDate(p.lastActive)}` : "private repo — no public activity to show"}
+                            </p>
+                        </li>
+                    ))
+                }
+            </ul>
+        </div>
+    </div>
+</section>
+
+<style>
+    .story {
+        padding-block: clamp(3.5rem, 8vw, 6rem);
+        border-bottom: 1px solid var(--rule);
+    }
+
+    .log-line {
+        font-size: 0.78rem;
+        color: var(--text-faint);
+        margin-bottom: 0.75rem;
+    }
+
+    .log-line .tag {
+        color: var(--amber);
+    }
+
+    .story > .wrap > h2 {
+        font-size: clamp(1.7rem, 3.4vw, 2.4rem);
+        margin-bottom: 2.5rem;
+    }
+
+    .timeline {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 2.75rem;
+        border-left: 1px solid var(--rule);
+    }
+
+    .entry {
+        padding-left: clamp(1.25rem, 3vw, 2rem);
+        position: relative;
+        max-width: var(--measure);
+    }
+
+    .entry::before {
+        content: "";
+        position: absolute;
+        left: -5px;
+        top: 0.4rem;
+        width: 9px;
+        height: 9px;
+        border-radius: 50%;
+        background: var(--amber);
+    }
+
+    .entry-meta {
+        display: flex;
+        gap: 0.75rem;
+        align-items: baseline;
+        font-size: 0.75rem;
+        margin-bottom: 0.6rem;
+    }
+
+    .stage {
+        color: var(--teal);
+    }
+
+    .range {
+        color: var(--text-faint);
+    }
+
+    .entry h3 {
+        font-size: 1.3rem;
+        margin-bottom: 0.75rem;
+    }
+
+    .entry .body {
+        color: var(--text-dim);
+        font-size: 0.98rem;
+        line-height: 1.7;
+        margin-bottom: 0.85rem;
+    }
+
+    .quote {
+        font-size: 0.82rem;
+        color: var(--amber-dim);
+        font-style: italic;
+    }
+
+    .now {
+        margin-top: 3.5rem;
+        padding-top: 3rem;
+        border-top: 1px solid var(--rule);
+    }
+
+    .now h3 {
+        font-size: 1.4rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .now-list {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 1.25rem;
+    }
+
+    .now-list li {
+        background: var(--panel);
+        border: 1px solid var(--rule);
+        border-radius: var(--radius);
+        padding: 1.25rem;
+    }
+
+    .now-name {
+        display: inline-block;
+        font-size: 0.95rem;
+        color: var(--text);
+        text-decoration: none;
+        margin-bottom: 0.5rem;
+    }
+
+    .now-name:hover {
+        color: var(--amber);
+    }
+
+    .now-note {
+        color: var(--text-dim);
+        font-size: 0.88rem;
+        line-height: 1.55;
+        margin-bottom: 0.6rem;
+    }
+
+    .now-date {
+        font-size: 0.72rem;
+        color: var(--text-faint);
+    }
+</style>
