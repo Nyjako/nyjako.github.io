@@ -1,0 +1,129 @@
+@import "@fontsource/ibm-plex-mono/400.css";
+@import "@fontsource/ibm-plex-mono/500.css";
+@import "@fontsource/ibm-plex-mono/700.css";
+@import "@fontsource/inter/400.css";
+@import "@fontsource/inter/500.css";
+@import "@fontsource/inter/600.css";
+
+:root {
+    /* color */
+    --ink: #10141c;
+    --panel: #161c27;
+    --panel-raised: #1c2332;
+    --paper: #ece7d8;
+    --amber: #ffb454;
+    --amber-dim: #b8813a;
+    --teal: #7fd8c3;
+    --rule: #2a3245;
+    --text: #e6e2d6;
+    --text-dim: #8791a6;
+    --text-faint: #545e73;
+    --red: #e07868;
+
+    /* type */
+    --font-mono: "IBM Plex Mono", ui-monospace, "SF Mono", Consolas, monospace;
+    --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+
+    /* layout */
+    --measure: 780px;
+    --edge: clamp(1.25rem, 4vw, 3rem);
+    --radius: 3px;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    background: var(--ink);
+    color-scheme: dark;
+}
+
+body {
+    margin: 0;
+    background: var(--ink);
+    color: var(--text);
+    font-family: var(--font-sans);
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* subtle scanline / crt texture, very low opacity so it reads as material, not gimmick */
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 999;
+    background: repeating-linear-gradient(
+        to bottom,
+        rgba(255, 255, 255, 0.012) 0px,
+        rgba(255, 255, 255, 0.012) 1px,
+        transparent 1px,
+        transparent 3px
+    );
+    mix-blend-mode: overlay;
+}
+
+h1,
+h2,
+h3,
+h4 {
+    font-family: var(--font-mono);
+    font-weight: 700;
+    line-height: 1.05;
+    margin: 0;
+    letter-spacing: -0.01em;
+}
+
+p {
+    margin: 0;
+}
+
+a {
+    color: inherit;
+}
+
+::selection {
+    background: var(--amber);
+    color: var(--ink);
+}
+
+:focus-visible {
+    outline: 2px solid var(--amber);
+    outline-offset: 3px;
+}
+
+.mono {
+    font-family: var(--font-mono);
+}
+
+.wrap {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding-inline: var(--edge);
+}
+
+.eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--amber-dim);
+}
+
+.rule {
+    border: none;
+    border-top: 1px solid var(--rule);
+    margin: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.001ms !important;
+        scroll-behavior: auto !important;
+    }
+}

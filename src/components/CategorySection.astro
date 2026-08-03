@@ -1,0 +1,76 @@
+---
+import type { Category } from "../data/content";
+import ProjectCard from "./ProjectCard.astro";
+
+interface Props {
+    category: Category;
+    index: number;
+}
+
+const { category, index } = Astro.props as Props;
+const seq = String(index + 1).padStart(2, "0");
+---
+
+<section class="cat" id={category.id}>
+    <div class="wrap">
+        <div class="cat-head">
+            <p class="mono log-line">
+                <span class="seq">[{seq}]</span> mount <span class="tag"
+                    >/{category.logTag}</span
+                >
+            </p>
+            <h2>{category.title}</h2>
+            <p class="intro">{category.intro}</p>
+        </div>
+        <div class="grid">
+            {
+                category.projects.map((p, i) => (
+                    <ProjectCard project={p} index={i} />
+                ))
+            }
+        </div>
+    </div>
+</section>
+
+<style>
+    .cat {
+        padding-block: clamp(3.5rem, 8vw, 6rem);
+        border-bottom: 1px solid var(--rule);
+    }
+
+    .cat-head {
+        max-width: var(--measure);
+        margin-bottom: 2.5rem;
+    }
+
+    .log-line {
+        font-size: 0.78rem;
+        color: var(--text-faint);
+        margin-bottom: 0.75rem;
+    }
+
+    .log-line .seq {
+        color: var(--text-dim);
+    }
+
+    .log-line .tag {
+        color: var(--amber);
+    }
+
+    .cat-head h2 {
+        font-size: clamp(1.7rem, 3.4vw, 2.4rem);
+        margin-bottom: 0.85rem;
+    }
+
+    .intro {
+        color: var(--text-dim);
+        max-width: 60ch;
+        font-size: 1.02rem;
+    }
+
+    .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+        gap: 1rem;
+    }
+</style>

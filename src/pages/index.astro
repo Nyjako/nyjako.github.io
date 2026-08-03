@@ -1,0 +1,19 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Nav from "../components/Nav.astro";
+import Hero from "../components/Hero.astro";
+import CategorySection from "../components/CategorySection.astro";
+import Skills from "../components/Skills.astro";
+import About from "../components/About.astro";
+import Footer from "../components/Footer.astro";
+import { categories } from "../data/content";
+---
+
+<Layout>
+    <Nav />
+    <Hero />
+    <Skills />
+    {categories.map((cat, i) => <CategorySection category={cat} index={i} />)}
+    <About />
+    <Footer />
+</Layout>

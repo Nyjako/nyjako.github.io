@@ -1,0 +1,126 @@
+---
+import { person, forks } from "../data/content";
+---
+
+<section class="about" id="about">
+    <div class="wrap about-grid">
+        <div>
+            <p class="mono log-line"><span class="tag">#</span> readme</p>
+            <h2>The pattern, if you're looking for one</h2>
+            <p class="body">
+                Most of the work above didn't start as a portfolio piece. It
+                started because an official tool was Windows-only, a build
+                folder was eating disk space, or a tutorial on writing an OS
+                looked too interesting to skip. That's the throughline:
+                systems-level curiosity (C, C++, Rust, kernels, header-only
+                libraries) paired with a habit of building the specific tool a
+                problem calls for, whether that's a CLI, a Discord bot, or a
+                full web stack.
+            </p>
+            <p class="joke mono">&gt; {person.joke}</p>
+        </div>
+
+        <div class="forks">
+            <p class="mono label">also studied (forked, not authored)</p>
+            <ul>
+                {
+                    forks.map((f) => (
+                        <li>
+                            <span class="mono fname">{f.name}</span>
+                            <span class="fnote">{f.note}</span>
+                        </li>
+                    ))
+                }
+            </ul>
+        </div>
+    </div>
+</section>
+
+<style>
+    .about {
+        padding-block: clamp(3.5rem, 8vw, 6rem);
+        border-bottom: 1px solid var(--rule);
+    }
+
+    .about-grid {
+        display: grid;
+        grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+        gap: clamp(2rem, 5vw, 4rem);
+    }
+
+    .log-line {
+        font-size: 0.78rem;
+        color: var(--text-faint);
+        margin-bottom: 0.75rem;
+    }
+
+    .log-line .tag {
+        color: var(--amber);
+    }
+
+    .about h2 {
+        font-size: clamp(1.6rem, 3vw, 2.1rem);
+        margin-bottom: 1.2rem;
+        max-width: 20ch;
+    }
+
+    .body {
+        color: var(--text-dim);
+        font-size: 1.02rem;
+        line-height: 1.7;
+        max-width: 58ch;
+    }
+
+    .joke {
+        margin-top: 1.4rem;
+        font-size: 0.85rem;
+        color: var(--teal);
+    }
+
+    .forks {
+        border-left: 1px solid var(--rule);
+        padding-left: clamp(1.5rem, 3vw, 2.5rem);
+    }
+
+    .label {
+        font-size: 0.72rem;
+        color: var(--text-faint);
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        margin-bottom: 1rem;
+    }
+
+    ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 0.9rem;
+    }
+
+    .fname {
+        display: block;
+        font-size: 0.88rem;
+        color: var(--text);
+    }
+
+    .fnote {
+        display: block;
+        font-size: 0.82rem;
+        color: var(--text-faint);
+        margin-top: 0.15rem;
+    }
+
+    @media (max-width: 760px) {
+        .about-grid {
+            grid-template-columns: 1fr;
+        }
+        .forks {
+            border-left: none;
+            border-top: 1px solid var(--rule);
+            padding-left: 0;
+            padding-top: 1.5rem;
+        }
+    }
+</style>

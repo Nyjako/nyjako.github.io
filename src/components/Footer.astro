@@ -1,0 +1,132 @@
+---
+import { person } from "../data/content";
+const year = new Date().getFullYear();
+---
+
+<footer class="foot" id="contact">
+    <div class="wrap foot-grid">
+        <div>
+            <p class="mono log-line">
+                <span class="tag">$</span> contact --reach
+            </p>
+            <h2>Get in touch</h2>
+            <p class="body">
+                The fastest way to reach {person.name.split(" ")[0]} right now is
+                GitHub an email or LinkedIn
+            </p>
+            <div class="links-row">
+                <a
+                    class="btn-primary mono"
+                    href={person.github}
+                    target="_blank"
+                    rel="noopener">github →</a
+                >
+                <a class="btn-ghost mono" href={`mailto:${person.email}`}
+                    >email →</a
+                >
+                <a
+                    class="btn-ghost mono"
+                    href={person.linkedin}
+                    target="_blank"
+                    rel="noopener">linkedin →</a
+                >
+            </div>
+        </div>
+        <div class="meta mono">
+            <p>{person.name}</p>
+            <p class="dim">{person.location}</p>
+            <p class="dim">&copy; {year}</p>
+        </div>
+    </div>
+</footer>
+
+<style>
+    .foot {
+        padding-block: clamp(3rem, 7vw, 5rem);
+    }
+
+    .foot-grid {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        gap: 2rem;
+        flex-wrap: wrap;
+    }
+
+    .log-line {
+        font-size: 0.78rem;
+        color: var(--text-faint);
+        margin-bottom: 0.75rem;
+    }
+
+    .log-line .tag {
+        color: var(--amber);
+    }
+
+    .foot h2 {
+        font-size: clamp(1.7rem, 3.4vw, 2.3rem);
+        margin-bottom: 1rem;
+    }
+
+    .body {
+        color: var(--text-dim);
+        max-width: 46ch;
+        margin-bottom: 1.4rem;
+    }
+
+    .btn-primary {
+        display: inline-block;
+        background: var(--amber);
+        color: var(--ink);
+        text-decoration: none;
+        padding: 0.75rem 1.15rem;
+        border-radius: var(--radius);
+        font-size: 0.85rem;
+    }
+
+    .links-row {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    .btn-ghost {
+      display: inline-block;
+      text-decoration: none;
+      padding: 0.75rem 1.15rem;
+      border-radius: var(--radius);
+      font-size: 0.85rem;
+      color: var(--text);
+      border: 1px solid var(--rule);
+      transition: border-color 0.2s ease;
+    }
+
+    .btn-ghost:hover {
+      border-color: var(--text-dim);
+    }
+
+    .todo {
+        margin-top: 0.9rem;
+        font-size: 0.75rem;
+        color: var(--text-faint);
+    }
+
+    .meta {
+        font-size: 0.8rem;
+        text-align: right;
+    }
+
+    .meta p {
+        margin-bottom: 0.25rem;
+    }
+
+    .dim {
+        color: var(--text-faint);
+    }
+
+    @media (max-width: 560px) {
+        .meta {
+            text-align: left;
+        }
+    }
+</style>

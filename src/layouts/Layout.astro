@@ -1,0 +1,27 @@
+---
+import "../styles/global.css";
+
+interface Props {
+    title?: string;
+    description?: string;
+}
+
+const {
+    title = "Kacper Tucholski — Nyjako",
+    description = "Systems-leaning developer working across C, C++, Rust and full-stack web — OS internals, TUIs, and tools built to fix real, specific annoyances.",
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <!-- <link rel="icon" type="image/svg+xml" href="/favicon.svg" /> -->
+        <meta name="description" content={description} />
+        <title>{title}</title>
+    </head>
+    <body>
+        <slot />
+    </body>
+</html>

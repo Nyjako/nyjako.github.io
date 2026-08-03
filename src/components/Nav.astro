@@ -1,0 +1,75 @@
+---
+import { categories } from "../data/content";
+---
+
+<header class="site-nav">
+    <div class="wrap nav-inner">
+        <a href="#top" class="mono brand"
+            >nyjako<span class="cursor-dot">_</span></a
+        >
+        <nav class="links mono">
+            {categories.map((c) => <a href={`#${c.id}`}>{c.logTag}</a>)}
+            <a href="#about">about</a>
+        </nav>
+    </div>
+</header>
+
+<style>
+    .site-nav {
+        position: sticky;
+        top: 0;
+        z-index: 50;
+        backdrop-filter: blur(10px);
+        background: rgba(16, 20, 28, 0.72);
+        border-bottom: 1px solid var(--rule);
+    }
+
+    .nav-inner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding-block: 0.9rem;
+    }
+
+    .brand {
+        text-decoration: none;
+        color: var(--text);
+        font-weight: 700;
+        font-size: 0.95rem;
+    }
+
+    .cursor-dot {
+        color: var(--amber);
+        animation: blink 1.1s steps(1) infinite;
+    }
+
+    @keyframes blink {
+        50% {
+            opacity: 0;
+        }
+    }
+
+    .links {
+        display: flex;
+        gap: 1.4rem;
+        font-size: 0.78rem;
+    }
+
+    .links a {
+        text-decoration: none;
+        color: var(--text-dim);
+        letter-spacing: 0.03em;
+        transition: color 0.15s ease;
+    }
+
+    .links a:hover {
+        color: var(--amber);
+    }
+
+    @media (max-width: 640px) {
+        .links {
+            gap: 0.9rem;
+            overflow-x: auto;
+        }
+    }
+</style>

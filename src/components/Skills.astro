@@ -1,0 +1,84 @@
+---
+import { skillGroups } from "../data/content";
+---
+
+<section class="skills" id="skills">
+    <div class="wrap">
+        <p class="mono log-line"><span class="tag">$</span> lsmod</p>
+        <h2>What's loaded</h2>
+        <div class="groups">
+            {
+                skillGroups.map((g) => (
+                    <div class="group">
+                        <p class="mono label">{g.label}</p>
+                        <ul>
+                            {g.items.map((item) => (
+                                <li class="mono">{item}</li>
+                            ))}
+                        </ul>
+                    </div>
+                ))
+            }
+        </div>
+    </div>
+</section>
+
+<style>
+    .skills {
+        padding-block: clamp(3.5rem, 8vw, 6rem);
+        border-bottom: 1px solid var(--rule);
+        background: var(--panel);
+    }
+
+    .log-line {
+        font-size: 0.78rem;
+        color: var(--text-faint);
+        margin-bottom: 0.75rem;
+    }
+
+    .log-line .tag {
+        color: var(--amber);
+    }
+
+    .skills h2 {
+        font-size: clamp(1.7rem, 3.4vw, 2.4rem);
+        margin-bottom: 2.2rem;
+    }
+
+    .groups {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 2rem;
+    }
+
+    .label {
+        font-size: 0.75rem;
+        color: var(--amber-dim);
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        margin-bottom: 0.9rem;
+    }
+
+    ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    li {
+        font-size: 0.88rem;
+        color: var(--text);
+        padding-left: 1.1rem;
+        position: relative;
+    }
+
+    li::before {
+        content: "\2022";
+        position: absolute;
+        left: 0;
+        color: var(--teal);
+    }
+</style>

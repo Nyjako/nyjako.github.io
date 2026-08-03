@@ -1,0 +1,89 @@
+---
+import type { Project } from "../data/content";
+
+interface Props {
+    project: Project;
+    index: number;
+}
+
+const { project, index } = Astro.props as Props;
+const num = String(index + 1).padStart(2, "0");
+---
+
+<a class="card" href={project.url} target="_blank" rel="noopener">
+    <div class="card-head">
+        <span class="mono num">{num}</span>
+        <span class="mono stack">{project.stack}</span>
+    </div>
+    <h3 class="card-name">{project.name}</h3>
+    <p class="card-desc">{project.desc}</p>
+    {project.note && <p class="card-note mono">{project.note}</p>}
+    <span class="card-link mono">github →</span>
+</a>
+
+<style>
+    .card {
+        display: flex;
+        flex-direction: column;
+        gap: 0.65rem;
+        padding: 1.4rem;
+        background: var(--panel);
+        border: 1px solid var(--rule);
+        border-radius: var(--radius);
+        text-decoration: none;
+        color: var(--text);
+        transition:
+            border-color 0.2s ease,
+            transform 0.2s ease,
+            background 0.2s ease;
+    }
+
+    .card:hover {
+        border-color: var(--amber-dim);
+        background: var(--panel-raised);
+        transform: translateY(-2px);
+    }
+
+    .card-head {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 0.72rem;
+    }
+
+    .num {
+        color: var(--text-faint);
+    }
+
+    .stack {
+        color: var(--teal);
+        letter-spacing: 0.02em;
+    }
+
+    .card-name {
+        font-size: 1.15rem;
+    }
+
+    .card-desc {
+        color: var(--text-dim);
+        font-size: 0.92rem;
+        line-height: 1.55;
+        flex-grow: 1;
+    }
+
+    .card-note {
+        font-size: 0.78rem;
+        color: var(--amber-dim);
+        font-style: italic;
+    }
+
+    .card-link {
+        font-size: 0.72rem;
+        color: var(--text-faint);
+        margin-top: 0.3rem;
+    }
+
+    .card:hover .card-link {
+        color: var(--amber);
+    }
+</style>

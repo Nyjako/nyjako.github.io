@@ -1,0 +1,356 @@
+---
+import { person } from "../data/content";
+---
+
+<section class="hero" id="top">
+    <div class="wrap hero-grid">
+        <div
+            class="boot"
+            role="img"
+            aria-label="Terminal boot sequence, followed by the site introducing itself"
+        >
+            <div class="boot-bar">
+                <span class="dot" aria-hidden="true"></span>
+                <span class="dot" aria-hidden="true"></span>
+                <span class="dot" aria-hidden="true"></span>
+                <span class="boot-title mono">nyjako@boot ~ </span>
+            </div>
+            <pre class="boot-log mono" id="boot-log" aria-hidden="true"></pre>
+        </div>
+
+        <div class="identity">
+            <p class="eyebrow" id="ident-eyebrow" style="opacity:0">whoami</p>
+            <h1 id="ident-name" style="opacity:0">{person.name}</h1>
+            <p class="handle mono" id="ident-handle" style="opacity:0">
+                @{person.handle} · {person.location}
+            </p>
+            <p class="tagline" id="ident-tagline" style="opacity:0">
+                &ldquo;{person.tagline}&rdquo;
+            </p>
+            <div class="hero-actions" id="ident-actions" style="opacity:0">
+                <a
+                    class="btn btn-primary"
+                    href={person.github}
+                    target="_blank"
+                    rel="noopener">View GitHub →</a
+                >
+                <a class="btn btn-ghost" href="#systems">Browse the work</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="scroll-cue mono" aria-hidden="true">
+        <span>scroll</span>
+        <span class="chevron">▾</span>
+    </div>
+</section>
+
+<style>
+    .hero {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding-block: clamp(4rem, 10vh, 6rem);
+        position: relative;
+        background:
+            radial-gradient(
+                ellipse 900px 500px at 15% -10%,
+                rgba(255, 180, 84, 0.08),
+                transparent 60%
+            ),
+            var(--ink);
+    }
+
+    .hero-grid {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        gap: clamp(2rem, 5vw, 5rem);
+        align-items: center;
+    }
+
+    .boot {
+        background: var(--panel);
+        border: 1px solid var(--rule);
+        border-radius: var(--radius);
+        overflow: hidden;
+        box-shadow: 0 40px 80px -40px rgba(0, 0, 0, 0.6);
+        height: 363px;
+    }
+
+    .boot-bar {
+        display: flex;
+        align-items: center;
+        gap: 0.4rem;
+        padding: 0.65rem 0.85rem;
+        border-bottom: 1px solid var(--rule);
+        background: var(--panel-raised);
+    }
+
+    .dot {
+        width: 9px;
+        height: 9px;
+        border-radius: 50%;
+        background: var(--rule);
+    }
+
+    .boot-title {
+        margin-left: 0.5rem;
+        font-size: 0.75rem;
+        color: var(--text-faint);
+    }
+
+    .boot-log {
+        margin: 0;
+        padding: 1.1rem 1.1rem 1.3rem;
+        min-height: 280px;
+        font-size: 0.82rem;
+        line-height: 1.65;
+        white-space: pre-wrap;
+        word-break: break-word;
+        color: var(--text-dim);
+    }
+
+    .boot-log :global(.ok) {
+        color: var(--teal);
+    }
+
+    .boot-log :global(.tag) {
+        color: var(--amber);
+    }
+
+    .boot-log :global(.dim) {
+        color: var(--text-faint);
+    }
+
+    .boot-log :global(.cursor) {
+        display: inline-block;
+        width: 0.55em;
+        background: var(--amber);
+        animation: blink 1s steps(1) infinite;
+    }
+
+    @keyframes blink {
+        50% {
+            opacity: 0;
+        }
+    }
+
+    .identity {
+        display: flex;
+        flex-direction: column;
+        gap: 0.9rem;
+    }
+
+    .identity h1 {
+        font-size: clamp(2.4rem, 5.2vw, 4rem);
+        transition: opacity 0.6s ease;
+    }
+
+    #ident-eyebrow,
+    .handle,
+    .tagline,
+    .hero-actions {
+        transition: opacity 0.6s ease;
+    }
+
+    .handle {
+        color: var(--text-dim);
+        font-size: 0.95rem;
+    }
+
+    .tagline {
+        font-size: 1.2rem;
+        color: var(--text);
+        max-width: 34ch;
+    }
+
+    .hero-actions {
+        display: flex;
+        gap: 0.85rem;
+        margin-top: 0.6rem;
+        flex-wrap: wrap;
+    }
+
+    .btn {
+        font-family: var(--font-mono);
+        font-size: 0.85rem;
+        padding: 0.75rem 1.15rem;
+        border-radius: var(--radius);
+        text-decoration: none;
+        border: 1px solid var(--rule);
+        transition:
+            border-color 0.2s ease,
+            transform 0.2s ease,
+            background 0.2s ease;
+    }
+
+    .btn-primary {
+        background: var(--amber);
+        color: var(--ink);
+        border-color: var(--amber);
+    }
+
+    .btn-primary:hover {
+        transform: translateY(-1px);
+    }
+
+    .btn-ghost {
+        color: var(--text);
+    }
+
+    .btn-ghost:hover {
+        border-color: var(--text-dim);
+    }
+
+    .scroll-cue {
+        position: absolute;
+        bottom: 1.75rem;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.3rem;
+        font-size: 0.7rem;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--text-faint);
+    }
+
+    .chevron {
+        animation: nudge 2.2s ease-in-out infinite;
+    }
+
+    @keyframes nudge {
+        0%,
+        100% {
+            transform: translateY(0);
+        }
+        50% {
+            transform: translateY(4px);
+        }
+    }
+
+    @media (max-width: 860px) {
+        .hero-grid {
+            grid-template-columns: 1fr;
+        }
+        .boot {
+            order: 2;
+        }
+        .identity {
+            order: 1;
+        }
+    }
+</style>
+
+<script>
+    const lines = [
+        {
+            text: "[    0.000000] nyjako-boot: initializing portfolio v1.0",
+            cls: "dim",
+        },
+        { text: "[    0.041203] mount: /systems  (C, C++, Rust)", cls: "ok" },
+        {
+            text: "[    0.082701] mount: /netstack (Axum, Leptos, Drogon)",
+            cls: "ok",
+        },
+        {
+            text: "[    0.114550] mount: /usrdev   (gaming tools & bots)",
+            cls: "ok",
+        },
+        {
+            text: "[    0.151982] loading module: nyjako_os.rs ......... ok",
+            cls: "tag",
+        },
+        {
+            text: "[    0.198113] loading module: GOBLIN.h ............. ok",
+            cls: "tag",
+        },
+        {
+            text: "[    0.233340] loading module: CodeMop.tui .......... ok",
+            cls: "tag",
+        },
+        {
+            text: "[    0.276018] warning: minimax.c not found, skipping",
+            cls: "dim",
+        },
+        { text: "[    0.312455] all modules loaded", cls: "ok" },
+        { text: "", cls: "" },
+        { text: "nyjako login: kacper", cls: "" },
+        { text: "$ whoami", cls: "" },
+    ];
+
+    const logEl = document.getElementById("boot-log");
+    const reveal = (id: string) => {
+        const el = document.getElementById(id);
+        if (el) el.style.opacity = "1";
+    };
+
+    const prefersReduced = window.matchMedia(
+        "(prefers-reduced-motion: reduce)",
+    ).matches;
+
+    async function typeLine(
+        el: HTMLElement,
+        text: string,
+        cls: string,
+        speed: number,
+    ) {
+        const span = document.createElement("span");
+        if (cls) span.className = cls;
+        el.appendChild(span);
+        for (const ch of text) {
+            span.textContent += ch;
+            if (speed) await new Promise((r) => setTimeout(r, speed));
+        }
+        el.appendChild(document.createTextNode("\n"));
+    }
+
+    async function boot() {
+        if (!logEl) return;
+
+        if (prefersReduced) {
+            logEl.textContent = lines.map((l) => l.text).join("\n");
+            reveal("ident-eyebrow");
+            reveal("ident-name");
+            reveal("ident-handle");
+            reveal("ident-tagline");
+            reveal("ident-actions");
+            return;
+        }
+
+        const cursor = document.createElement("span");
+        cursor.className = "cursor";
+        cursor.textContent = "\u00a0";
+
+        for (let i = 0; i < lines.length; i++) {
+            const line = lines[i];
+            const isLast = i === lines.length - 1;
+            await typeLine(
+                logEl,
+                line.text,
+                line.cls,
+                isLast ? 55 : line.text ? 6 : 0,
+            );
+            if (!isLast)
+                await new Promise((r) => setTimeout(r, line.text ? 40 : 120));
+        }
+
+        logEl.appendChild(cursor);
+        await new Promise((r) => setTimeout(r, 500));
+
+        reveal("ident-eyebrow");
+        await new Promise((r) => setTimeout(r, 120));
+        reveal("ident-name");
+        await new Promise((r) => setTimeout(r, 120));
+        reveal("ident-handle");
+        await new Promise((r) => setTimeout(r, 120));
+        reveal("ident-tagline");
+        await new Promise((r) => setTimeout(r, 120));
+        reveal("ident-actions");
+    }
+
+    boot();
+</script>
