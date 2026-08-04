@@ -5,16 +5,17 @@ import { person, forks } from "../data/content";
 <section class="about" id="about">
     <div class="wrap about-grid">
         <div>
-            <p class="mono log-line"><span class="tag">#</span> readme</p>
+            <p class="mono log-line"><span class="tag">#</span> CHANGELOG.md</p>
             <h2>The pattern, if you're looking for one</h2>
             <p class="body">
-                Current stance, if you want it in one paragraph: C over C++
-                when the project allows it, Makefile over CMake once CMake
-                starts outweighing the actual code, and a growing allergy to
-                shipping 200kb of JavaScript to render a page that could've
-                been three files. None of that is a rule against React or
-                CMake themselves — it's a rule against reaching for them out
-                of habit. See the log above for how that opinion got earned.
+                - v1: "I like building the tool the problem calls for"
+                <br />
+                - v2: "C &gt; C++, Make &gt; CMake, JS is a crime against static pages"
+                <br />
+                - v3 (this one): turns out I just enjoy removing complexity more than
+                adding features. That's the actual pattern — C, Makefiles, header-only
+                libraries, pages that load before you've finished clicking the link.
+                React and CMake still have their place, I just make them earn it now.
             </p>
             <p class="joke mono">&gt; {person.joke}</p>
         </div>

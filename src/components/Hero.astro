@@ -41,17 +41,17 @@ import { person } from "../data/content";
 
     <div class="scroll-cue mono" aria-hidden="true">
         <span>scroll</span>
-        <span class="chevron">▾</span>
+        <span class="chevron">↓</span>
     </div>
 </section>
 
 <style>
     .hero {
-        min-height: 100vh;
+        min-height: 100svh;
         display: flex;
         flex-direction: column;
         justify-content: center;
-        padding-block: clamp(4rem, 10vh, 6rem);
+        padding-block: clamp(2.5rem, 6vh, 4rem);
         position: relative;
         background:
             radial-gradient(
@@ -75,7 +75,6 @@ import { person } from "../data/content";
         border-radius: var(--radius);
         overflow: hidden;
         box-shadow: 0 40px 80px -40px rgba(0, 0, 0, 0.6);
-        height: 363px;
     }
 
     .boot-bar {
@@ -103,7 +102,7 @@ import { person } from "../data/content";
     .boot-log {
         margin: 0;
         padding: 1.1rem 1.1rem 1.3rem;
-        min-height: 280px;
+        min-height: 320px;
         font-size: 0.82rem;
         line-height: 1.65;
         white-space: pre-wrap;
@@ -241,6 +240,9 @@ import { person } from "../data/content";
         }
         .identity {
             order: 1;
+        }
+        .boot-log {
+            min-height: 200px;
         }
     }
 </style>

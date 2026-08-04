@@ -37,6 +37,8 @@
 html {
     background: var(--ink);
     color-scheme: dark;
+    scroll-behavior: smooth;
+    scroll-padding-top: 4.5rem;
 }
 
 body {

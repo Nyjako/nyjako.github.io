@@ -11,6 +11,7 @@ import { categories } from "../data/content";
             {categories.map((c) => <a href={`#${c.id}`}>{c.logTag}</a>)}
             <a href="#story">log</a>
             <a href="#about">about</a>
+            <a href="#interests">now</a>
         </nav>
     </div>
 </header>
@@ -71,6 +72,11 @@ import { categories } from "../data/content";
         .links {
             gap: 0.9rem;
             overflow-x: auto;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+        .links::-webkit-scrollbar {
+            display: none;
         }
     }
 </style>

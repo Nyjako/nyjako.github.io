@@ -1,0 +1,90 @@
+---
+import { interests } from "../data/interests";
+---
+
+<section class="interests" id="interests">
+    <div class="wrap">
+        <p class="mono log-line"><span class="tag">$</span> neofetch</p>
+        <div class="fetch-card mono">
+            <div class="fetch-row">
+                <span class="key">os</span><span class="val"
+                    >{interests.os}</span>
+            </div>
+            <div class="fetch-row">
+                <span class="key">now playing</span><span class="val"
+                    >{interests.nowPlaying.join(", ")}</span>
+            </div>
+            <div class="fetch-row">
+                <span class="key">coding soundtrack</span><span class="val"
+                    >{interests.codingSoundtrack}</span>
+            </div>
+            <div class="fetch-row">
+                <span class="key">single-player</span><span class="val"
+                    >{interests.singlePlayer.join(", ")}</span>
+            </div>
+            <div class="fetch-row">
+                <span class="key">multiplayer</span><span class="val"
+                    >{interests.multiplayer.join(", ")}</span>
+            </div>
+            <div class="fetch-row note">
+                <span class="key">note</span><span class="val"
+                    >{interests.note}</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    .interests {
+        padding-block: clamp(3rem, 7vw, 5rem);
+        border-bottom: 1px solid var(--rule);
+    }
+
+    .log-line {
+        font-size: 0.78rem;
+        color: var(--text-faint);
+        margin-bottom: 0.75rem;
+    }
+
+    .log-line .tag {
+        color: var(--amber);
+    }
+
+    .fetch-card {
+        background: var(--panel);
+        border: 1px solid var(--rule);
+        border-radius: var(--radius);
+        padding: 1.5rem clamp(1.25rem, 3vw, 2rem);
+        max-width: var(--measure);
+        display: flex;
+        flex-direction: column;
+        gap: 0.65rem;
+    }
+
+    .fetch-row {
+        display: grid;
+        grid-template-columns: 160px 1fr;
+        gap: 1rem;
+        font-size: 0.85rem;
+    }
+
+    .key {
+        color: var(--teal);
+    }
+
+    .val {
+        color: var(--text);
+    }
+
+    .note .val {
+        color: var(--amber-dim);
+        font-style: italic;
+    }
+
+    @media (max-width: 560px) {
+        .fetch-row {
+            grid-template-columns: 1fr;
+            gap: 0.15rem;
+        }
+    }
+</style>
