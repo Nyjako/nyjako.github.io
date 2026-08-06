@@ -1,6 +1,3 @@
-// All data here is drawn directly from the verified GitHub-sourced brief.
-// Nothing invented — see README-CONTENT-GAPS.md for what's still missing.
-
 export const person = {
     name: "Kacper Tucholski",
     handle: "Nyjako",
@@ -23,7 +20,7 @@ export type Project = {
 
 export type Category = {
     id: string;
-    logTag: string; // boot-log style module name
+    logTag: string;
     title: string;
     intro: string;
     projects: Project[];

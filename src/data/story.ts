@@ -28,7 +28,7 @@ export const storyChapters: Chapter[] = [
             "Junior high, still no English, and I wanted to do something more serious. I found a C++ tutorial series. It was too early — I mostly just installed a pile of garbage on my PC and called it learning.",
             "What actually stuck was .bat files. Three years, a lot of scripts: a shutdown helper you could tell ‘turn off in N hours,’ something like netuser for changing passwords (which, somehow, let me change the admin password on my school PC — no idea what was supposedly protecting that), and a pseudo-virus that dropped a copy of itself into the autostart folder and just closed the PC the moment it launched.",
         ],
-        // quote: "// peak achievement of this era: one script, accidental privilege escalation, school property",
+        // quote: "// peak achievement of this era: privilege escalation.",
     },
     {
         id: "bootloader",
