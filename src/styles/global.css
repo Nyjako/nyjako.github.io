@@ -121,6 +121,11 @@ a {
     margin: 0;
 }
 
+/* scroll-reveal targets: animejs sets these visible via onScroll (see Layout.astro) */
+[data-reveal] {
+  opacity: 0;
+}
+
 @media (prefers-reduced-motion: reduce) {
     * {
         animation-duration: 0.001ms !important;

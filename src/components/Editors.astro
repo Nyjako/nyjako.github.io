@@ -9,10 +9,10 @@ import { editors } from "../data/editors";
         </p>
         <h2>Editors, ranked by when I actually used them</h2>
 
-        <ol class="timeline">
+        <ol class="timeline" data-reveal-group>
             {
                 editors.map((ed, i) => (
-                    <li class="entry">
+                    <li class="entry" data-reveal>
                         <div class="entry-meta mono">
                             <span class="rank">
                                 {String(i + 1).padStart(2, "0")}

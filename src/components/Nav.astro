@@ -7,13 +7,26 @@ import { categories } from "../data/content";
         <a href="#top" class="mono brand"
             >nyjako<span class="cursor-dot">_</span></a
         >
-        <nav class="links mono">
+
+        <nav class="links mono" id="nav-links">
             {categories.map((c) => <a href={`#${c.id}`}>{c.logTag}</a>)}
             <a href="#story">log</a>
             <a href="#about">about</a>
             <a href="#interests">now</a>
             <a href="#editors">tools</a>
         </nav>
+
+        <button
+            class="burger"
+            id="nav-burger"
+            aria-label="Toggle menu"
+            aria-expanded="false"
+            aria-controls="nav-links"
+        >
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
     </div>
 </header>
 
@@ -69,15 +82,92 @@ import { categories } from "../data/content";
         color: var(--amber);
     }
 
+    .burger {
+        display: none;
+        flex-direction: column;
+        justify-content: center;
+        gap: 5px;
+        width: 34px;
+        height: 34px;
+        background: none;
+        border: 1px solid var(--rule);
+        border-radius: var(--radius);
+        cursor: pointer;
+        padding: 0;
+    }
+
+    .burger span {
+        display: block;
+        height: 2px;
+        margin-inline: 8px;
+        background: var(--text);
+        transition:
+            transform 0.25s ease,
+            opacity 0.2s ease;
+    }
+
+    .burger.open span:nth-child(1) {
+        transform: translateY(7px) rotate(45deg);
+    }
+
+    .burger.open span:nth-child(2) {
+        opacity: 0;
+    }
+
+    .burger.open span:nth-child(3) {
+        transform: translateY(-7px) rotate(-45deg);
+    }
+
     @media (max-width: 640px) {
-        .links {
-            gap: 0.9rem;
-            overflow-x: auto;
-            scrollbar-width: none;
-            -ms-overflow-style: none;
+        .burger {
+            display: flex;
         }
-        .links::-webkit-scrollbar {
-            display: none;
+
+        .links {
+            position: fixed;
+            top: 58px;
+            left: 0;
+            right: 0;
+            flex-direction: column;
+            gap: 0;
+            background: var(--panel);
+            border-bottom: 1px solid var(--rule);
+            max-height: 0;
+            overflow: hidden;
+            opacity: 0;
+            transition:
+                max-height 0.3s ease,
+                opacity 0.25s ease;
+        }
+
+        .links.open {
+            max-height: 400px;
+            opacity: 1;
+        }
+
+        .links a {
+            padding: 0.9rem var(--edge);
+            border-top: 1px solid var(--rule);
+            font-size: 0.85rem;
         }
     }
 </style>
+
+<script>
+    const burger = document.getElementById("nav-burger");
+    const links = document.getElementById("nav-links");
+
+    burger?.addEventListener("click", () => {
+        const isOpen = links?.classList.toggle("open");
+        burger.classList.toggle("open", !!isOpen);
+        burger.setAttribute("aria-expanded", String(!!isOpen));
+    });
+
+    links?.querySelectorAll("a").forEach((a) => {
+        a.addEventListener("click", () => {
+            links.classList.remove("open");
+            burger?.classList.remove("open");
+            burger?.setAttribute("aria-expanded", "false");
+        });
+    });
+</script>

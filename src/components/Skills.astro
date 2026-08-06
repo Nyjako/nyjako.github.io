@@ -6,10 +6,10 @@ import { skillGroups } from "../data/content";
     <div class="wrap">
         <p class="mono log-line"><span class="tag">$</span> lsmod</p>
         <h2>What's loaded</h2>
-        <div class="groups">
+        <div class="groups" data-reveal-group>
             {
                 skillGroups.map((g) => (
-                    <div class="group">
+                    <div class="group" data-reveal>
                         <p class="mono label">{g.label}</p>
                         <ul>
                             {g.items.map((item) => (

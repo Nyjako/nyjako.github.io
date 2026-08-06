@@ -10,7 +10,7 @@ const { project, index } = Astro.props as Props;
 const num = String(index + 1).padStart(2, "0");
 ---
 
-<a class="card" href={project.url} target="_blank" rel="noopener">
+<a class="card" data-reveal href={project.url} target="_blank" rel="noopener">
     <div class="card-head">
         <span class="mono num">{num}</span>
         <span class="mono stack">{project.stack}</span>

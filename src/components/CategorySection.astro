@@ -22,7 +22,7 @@ const seq = String(index + 1).padStart(2, "0");
             <h2>{category.title}</h2>
             <p class="intro">{category.intro}</p>
         </div>
-        <div class="grid">
+        <div class="grid" data-reveal-group>
             {
                 category.projects.map((p, i) => (
                     <ProjectCard project={p} index={i} />

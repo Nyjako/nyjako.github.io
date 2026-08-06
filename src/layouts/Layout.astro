@@ -25,3 +25,42 @@ const {
         <slot />
     </body>
 </html>
+
+<script>
+    import { animate, stagger, onScroll } from "animejs";
+
+    const prefersReduced = window.matchMedia(
+        "(prefers-reduced-motion: reduce)",
+    ).matches;
+
+    const groups = document.querySelectorAll<HTMLElement>(
+        "[data-reveal-group]",
+    );
+
+    groups.forEach((group) => {
+        const items = Array.from(
+            group.querySelectorAll<HTMLElement>("[data-reveal]"),
+        );
+        if (!items.length) return;
+
+        if (prefersReduced) {
+            items.forEach((el) => {
+                el.style.opacity = "1";
+                el.style.transform = "none";
+            });
+            return;
+        }
+
+        animate(items, {
+            opacity: [0, 1],
+            translateY: [18, 0],
+            duration: 550,
+            ease: "outQuad",
+            delay: stagger(60),
+            autoplay: onScroll({
+                target: group,
+                enter: "bottom-=8% top",
+            }),
+        });
+    });
+</script>

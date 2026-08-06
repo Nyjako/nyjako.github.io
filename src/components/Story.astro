@@ -33,10 +33,10 @@ const nowProjects = await Promise.all(
         </p>
         <h2>How we got here</h2>
 
-        <ol class="timeline">
+        <ol class="timeline" data-reveal-group>
             {
                 storyChapters.map((ch) => (
-                    <li class="entry" id={ch.id}>
+                    <li class="entry" data-reveal id={ch.id}>
                         <div class="entry-meta mono">
                             <span class="stage">[{ch.stage}]</span>
                             <span class="range">{ch.range}</span>
@@ -56,10 +56,10 @@ const nowProjects = await Promise.all(
                 <span class="tag">$</span> ps aux | grep nyjako
             </p>
             <h3>Currently running</h3>
-            <ul class="now-list">
+            <ul class="now-list" data-reveal-group>
                 {
                     nowProjects.map((p) => (
-                        <li>
+                        <li data-reveal>
                             <a
                                 class="mono now-name"
                                 href={p.url}
