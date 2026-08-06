@@ -1,0 +1,106 @@
+---
+import { editors } from "../data/editors";
+---
+
+<section class="editors" id="editors">
+    <div class="wrap">
+        <p class="mono log-line">
+            <span class="tag">$</span> history | grep editor
+        </p>
+        <h2>Editors, ranked by when I actually used them</h2>
+
+        <ol class="timeline">
+            {
+                editors.map((ed, i) => (
+                    <li class="entry">
+                        <div class="entry-meta mono">
+                            <span class="rank">
+                                {String(i + 1).padStart(2, "0")}
+                            </span>
+                            <span class="verdict">{ed.verdict}</span>
+                        </div>
+                        <h3>{ed.name}</h3>
+                        <p class="body">{ed.blurb}</p>
+                    </li>
+                ))
+            }
+        </ol>
+    </div>
+</section>
+
+<style>
+    .editors {
+        padding-block: clamp(3.5rem, 8vw, 6rem);
+        border-bottom: 1px solid var(--rule);
+    }
+
+    .log-line {
+        font-size: 0.78rem;
+        color: var(--text-faint);
+        margin-bottom: 0.75rem;
+    }
+
+    .log-line .tag {
+        color: var(--amber);
+    }
+
+    .editors h2 {
+        font-size: clamp(1.6rem, 3vw, 2.2rem);
+        margin-bottom: 2.5rem;
+        max-width: 24ch;
+    }
+
+    .timeline {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 2.25rem;
+        border-left: 1px solid var(--rule);
+    }
+
+    .entry {
+        padding-left: clamp(1.25rem, 3vw, 2rem);
+        position: relative;
+        max-width: var(--measure);
+    }
+
+    .entry::before {
+        content: "";
+        position: absolute;
+        left: -5px;
+        top: 0.4rem;
+        width: 9px;
+        height: 9px;
+        border-radius: 50%;
+        background: var(--amber);
+    }
+
+    .entry-meta {
+        display: flex;
+        gap: 0.75rem;
+        align-items: baseline;
+        font-size: 0.75rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .rank {
+        color: var(--text-faint);
+    }
+
+    .verdict {
+        color: var(--teal);
+    }
+
+    .entry h3 {
+        font-size: 1.2rem;
+        margin-bottom: 0.6rem;
+    }
+
+    .entry .body {
+        color: var(--text-dim);
+        font-size: 0.95rem;
+        line-height: 1.7;
+    }
+</style>
