@@ -233,9 +233,6 @@ export const skillGroups = [
 
 export const forks = [
     { name: "c3c", note: "compiler for the C3 language" },
-    {
-        name: "SourceDemoRender",
-        note: "high-quality movie rendering for the Source engine",
-    },
+    { name: "SourceDemoRender", note: "high-quality movie rendering for the Source engine", },
     { name: "abaddon", note: "alternative Discord client, C++/GTK3" },
 ];
